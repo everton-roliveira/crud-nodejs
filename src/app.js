@@ -2,10 +2,21 @@ const exprees = require('express');
 const app = exprees();
 const http = require('http');
 const mongoose = require('mongoose');
+const router = exprees.Router();
 
 
 const port = normalizaPort(process.env.PORT || '3000');
 app.set('port', port);
+
+
+// ROTA PRINCIPAL
+router.get('/', function (req, res, next) {
+    res.status(200).send({
+        title: "Microserviço de Produtos",
+        version: "0.0.1"
+    });
+});
+app.use(router);
 
 const server = http.createServer(app);
 
@@ -20,7 +31,6 @@ server.listen(port, async () => {
         })
         .catch(error => console.log(error));
 });
-
 
 function normalizaPort(val) {
     const port = parseInt(val, 10);
