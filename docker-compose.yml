@@ -1,0 +1,30 @@
+# docker-compose.yml version
+version: '1'
+ 
+# Volume de dados para o mongo
+volumes:
+  mongostorage:
+ 
+# Services (Docker containers)
+services:
+  # Mongo Database
+  mongodb:
+    # Nome do container
+    container_name: mongodb_container
+    # https://hub.docker.com/r/alexpunct/mongo/
+    image: alexpunct/mongo:3.4
+    # Usamos o volume de dados de armazenamento intermediário e o caminho/data/db para o banco de dados dentro do contêiner
+    volumes: 
+      - mongostorage:/data/db
+    # expor uma porta do MongoDB à qual se conectar, definida pela variável de ambiente MONGODB_EXPOSED_PORT
+    # E mapear essa porta para a porta interna 27017 a que o Mongodb usa
+    ports:
+      - "${MONGODB_EXPOSED_PORT}:27017"
+    # Passando variáveis ​​de ambiente do host para o contêiner
+    # contêiner espera as seguintes variáveis
+    environment:
+      MONGODB_ADMIN_USER: $MONGODB_ADMIN_USER
+      MONGODB_ADMIN_PASS: $MONGODB_ADMIN_PASS
+      MONGODB_APPLICATION_DATABASE: $MONGODB_APPLICATION_DATABASE
+      MONGODB_APPLICATION_USER: $MONGODB_APPLICATION_USER
+      MONGODB_APPLICATION_PASS: $MONGODB_APPLICATION_PASS
