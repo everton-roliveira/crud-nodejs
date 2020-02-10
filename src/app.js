@@ -1,4 +1,5 @@
 const exprees = require('express');
+const bodyParser = require('body-parser');
 const app = exprees();
 const router = exprees.Router();
 const db = require('../config-db');
@@ -10,6 +11,9 @@ router.get('/', function (req, res, next) {
         version: "0.0.1"
     });
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
 module.exports = app;
