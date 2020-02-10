@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/everton-roliveira/crud-nodejs/issues"
   },
-  "homepage": "https://github.com/everton-roliveira/crud-nodejs#readme"
+  "homepage": "https://github.com/everton-roliveira/crud-nodejs#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
 }
